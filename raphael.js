@@ -370,8 +370,7 @@ Raphael = (function () {
             ay = (1 - t) * p1y + t * c1y,
             cx = (1 - t) * c2x + t * p2x,
             cy = (1 - t) * c2y + t * p2y,
-            alpha = (90 - math.atan((mx - nx) / (my - ny)) * 180 / math.PI);
-        (mx > nx || my < ny) && (alpha += 180);
+            alpha = math.atan2(my - ny, mx - nx) * 180 / math.PI + 180;
         return {x: x, y: y, m: {x: mx, y: my}, n: {x: nx, y: ny}, start: {x: ax, y: ay}, end: {x: cx, y: cy}, alpha: alpha};
     };
     var pathDimensions = cacher(function (path) {

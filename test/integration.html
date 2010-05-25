@@ -50,12 +50,28 @@
         });
       }
 
+      Raphael.fn.arrow = function(){
+        return this.path('M-9,3 L3,3 L3,8 L9,0 L3,-8 L3,-3 L-9,-3 z');
+      };
+
+      function rotateArrow(){
+        var canvas = Raphael('rotate-arrow', 600, 120);
+        var path = canvas.path('M10,10 v10 l10,80 l100,10 l100,-10 l10,-90 h-10 l-10,80 l-90,10 l-90,-10 l-10,-70 c0,0,10,70,100,70 c0,-60,0,-70,90-80 z')
+        var arrow = canvas.arrow().translate(10, 10)
+        var animate = function(){
+          arrow.rotate(0, true)
+          arrow.animateAlong(path, 10000, true, animate)
+        }
+        animate()
+      }
+
       window.onload = function () {
         drawPrimitives("circles", "circle", 50, 55, 50, 50);
         drawPrimitives("squares", "rect", 0, 5, 100, 100);
         drawPrimitives("rounded-squares", "rect", 0, 5, 100, 100, 20);
         drawPrimitives("ellipses", "ellipse", 50, 55, 50, 30);
         embedImages("image/raphael.png");
+        rotateArrow();
         drawLines("absolute-line", "lineTo", "absolutely", 5, 5, 100, 100)
         drawLines("relative-line", "lineTo", "relatively", 5, 5, 100, 100)
         drawLines("absolute-linec", "cplineTo", "absolutely", 5, 5, 100, 100, 50)
@@ -81,6 +97,8 @@
     <h3>Should embed 4 images with decreasing opacity</h3>
     <div id="images"></div>
     <h2>Paths</h2>
+    <div id="rotate-arrow"></div>
+    <h3>Should draw 4 straight lines to an absolute point</h3>
     <h3>Should draw 4 straight lines to an absolute point</h3>
     <div id="absolute-line"></div>
     <h3>Should draw 4 straight lines to a relative point</h3>
